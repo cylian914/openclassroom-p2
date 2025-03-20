@@ -60,6 +60,136 @@ a {
     color: var(--main-bg-color)
 }
 
+/****** Header ******/
+
+/* nav */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav img {
+    height: 19px;
+    overflow: hidden;
+    object-fit: cover;
+}
+
+nav ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+    display: flex;
+}
+
+nav ul li#active {
+    color: #0065FC;
+    padding-right: 68px;
+}
+
+nav ul li div {
+    width: 113px;
+    height: 2px;
+    background-color: var(--main-color);
+}
+
+/* recherche */
+
+
+div#recherche > * {
+    margin-bottom: 35px;
+}
+
+div#recherche div h2 {
+    font-weight: normal;
+    font-size: 16px;
+}
+
+
+form#recherche {
+    width: fit-content;
+    display: flex;
+    border-radius: 15px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: var(--main-bg-color)
+}
+form#recherche * {
+    font-size: 18px;
+    padding-right: 16px;
+    padding-left: 16px;
+}
+
+form#recherche input#recherche-input {
+    border: none;
+}
+form#recherche input#recherche-input:focus {
+    outline: none;
+}
+
+
+form#recherche i.fa-solid.fa-location-dot {
+    padding-bottom: 15px;
+    padding-top: 15px;
+    background-color: var(--main-bg-color);
+    color: black;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+}
+
+form#recherche button#recherche-submit-img {
+    display: none;
+}
+
+form#recherche button#recherche-submit-img, input#recherche-submit-txt {
+    padding-bottom: 15px;
+    padding-top: 15px;
+    background-color: var(--main-color);
+    border: 0px;
+    outline: solid;
+    outline-width: 1px;
+    outline-color: var(--main-color);
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+form#recherche input#recherche-submit-txt ,button#recherche-submit-img i {
+    color: white;
+}
+
+/* filtres */
+
+div#filtre {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 0px;
+}
+
+div#filtre ul {
+    display: flex;
+    gap: 15px;
+    padding: 0px;
+}
+
+div#filtre ul li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-right: 19px;
+    padding-left: 19px;
+    margin: 0px;
+    border: solid;
+    border-color: var(--main-bg-color);
+    border-radius: 25px;
+    border-width: 2px;
+    list-style: none;
+}
+
+div#filtre ul li:hover {
+    background-color: var(--filter-bg-color);
+}
+
 /****** Hebergements And Populaires ***********/
 .hebergements-and-populaires {
     display: flex;
@@ -205,7 +335,19 @@ a {
         box-sizing: border-box;
     }
     
-    .populaires, .populaires-cards .card,   {
+    div#filtre {
+        display: initial;
+        align-items: center;
+    }
+    
+    div#filtre ul {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+        padding: 0px;
+    }
+    
+    .populaires, .populaires-cards .card   {
         padding: 0px;
         margin: 0px;
     }
