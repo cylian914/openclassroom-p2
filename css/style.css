@@ -153,6 +153,7 @@ form#recherche button#recherche-submit-img, input#recherche-submit-txt {
 
 form#recherche input#recherche-submit-txt ,button#recherche-submit-img i {
     color: white;
+    cursor: pointer;
 }
 
 /* filtres */
@@ -171,17 +172,21 @@ div#filtre ul {
 }
 
 div#filtre ul li {
+    border: solid;
+    border-color: var(--main-bg-color);
+    border-radius: 25px;
+    border-width: 2px;
+    list-style: none;
+}
+
+div#filtre ul li a {
     display: flex;
     align-items: center;
     gap: 10px;
     padding-right: 19px;
     padding-left: 19px;
     margin: 0px;
-    border: solid;
-    border-color: var(--main-bg-color);
-    border-radius: 25px;
-    border-width: 2px;
-    list-style: none;
+
 }
 
 div#filtre ul li:hover {
@@ -309,7 +314,48 @@ div#header-txt h2#header-information-txt {
     margin-bottom: 5px;
 }
 
+/****** Activité ******/
 
+div#activite {
+    padding: 35px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+div#activite section {
+    padding-top: 30px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 30px;
+}
+
+div#activite section a {
+    display: flex;
+    flex-direction: column;
+    border-radius: 20px;
+    box-shadow: 0px 3px 10px #00000010;
+}
+
+div#activite section a img {
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    height: 380px;
+    object-fit: cover;
+}
+
+/***** Footer *****/
+
+footer {
+    display: grid;
+    background-color: var(--main-bg-color);
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+footer h2 {
+    font-weight: normal;
+}
 
 
 /* Le code ci-dessous correspond à la version responsive uniquement */
@@ -402,8 +448,27 @@ div#header-txt h2#header-information-txt {
     .populaires-cards .card {
         margin-bottom: 15px; 
     }
+    
     .hebergements-and-populaires section a {
         width: 100%;
         border-radius: 0px;
+    }
+    
+    .hebergements-card {
+        grid-template-columns: 1fr;
+    }
+    
+     div#activite section {
+        grid-template-columns: 1fr;
+    }
+    
+    div#activite section a img {
+        height: 141px;
+        object-fit: cover;
+    }
+    
+    footer {
+        grid-template-columns: repeat(1, 1fr);
+        gap: 50px;
     }
 }
