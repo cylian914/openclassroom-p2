@@ -112,7 +112,7 @@ div#recherche > * {
     margin-bottom: 35px;
 }
 
-form#recherche {
+form#recherche-form {
     width: fit-content;
     display: flex;
     border-radius: 15px;
@@ -120,21 +120,21 @@ form#recherche {
     border-style: solid;
     border-color: var(--main-bg-color)
 }
-form#recherche * {
+form#recherche-form * {
     font-size: 18px;
     padding-right: 16px;
     padding-left: 16px;
 }
 
-form#recherche input#recherche-input {
+form#recherche-form input#recherche-input {
     border: none;
 }
-form#recherche input#recherche-input:focus {
+form#recherche-form input#recherche-input:focus {
     outline: none;
 }
 
 
-form#recherche i.fa-solid.fa-location-dot {
+form#recherche-form i.fa-solid.fa-location-dot {
     padding-bottom: 15px;
     padding-top: 15px;
     background-color: var(--main-bg-color);
@@ -143,11 +143,11 @@ form#recherche i.fa-solid.fa-location-dot {
     border-bottom-left-radius: 15px;
 }
 
-form#recherche button#recherche-submit-img {
+form#recherche-form button#recherche-submit-img {
     display: none;
 }
 
-form#recherche button#recherche-submit-img, input#recherche-submit-txt {
+form#recherche-form button#recherche-submit-img, input#recherche-submit-txt {
     padding-bottom: 15px;
     padding-top: 15px;
     background-color: var(--main-color);
@@ -159,7 +159,7 @@ form#recherche button#recherche-submit-img, input#recherche-submit-txt {
     border-bottom-right-radius: 15px;
 }
 
-form#recherche input#recherche-submit-txt ,button#recherche-submit-img i {
+form#recherche-form input#recherche-submit-txt ,button#recherche-submit-img i {
     color: white;
     cursor: pointer;
 }
@@ -468,11 +468,11 @@ footer h2 {
         justify-content: space-between;
     }
     
-    form#recherche button#recherche-submit-img {
+    form#recherche-form button#recherche-submit-img {
         display: block;
     }
 
-    form#recherche input#recherche-submit-txt {
+    form#recherche-form input#recherche-submit-txt {
         display: none;
     }
     
