@@ -132,6 +132,25 @@ li:hover {
 	display: flex;
 	justify-content: center;
 	gap: 10px;
+	margin-bottom: 82px;
+}
+
+#category > li {
+	min-width: 100px;
+	border: solid;
+	border-width: 1px;
+	border-radius: 30px;
+	border-color: #1D6154;
+	color: #1D6154;
+	text-align: center;
+	font-family: Syne;
+	font-size: 16px;
+	padding: 14px;
+}
+
+#category > li.category-active {
+	color: white;
+	background-color: #1D6154;
 }
 
 .gallery {
