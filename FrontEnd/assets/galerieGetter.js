@@ -1,4 +1,4 @@
-const ip = "http://localhost:5678/api"
+const ip = "http://localhost:5678/api";
 
 const galery = document.getElementsByClassName("gallery")[0];
 const category = document.getElementById("category");
@@ -43,7 +43,6 @@ function initFilterList(works) {
     works.forEach((work) => {
         categoryNames.add(work.category.name);
     });
-    console.log(categoryNames);
     window.categoryNames = categoryNames;
     categoryNames.forEach((category) => {
         ele = document.createElement("li");
