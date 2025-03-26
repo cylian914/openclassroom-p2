@@ -7,6 +7,8 @@ const firstCategoryName = category.children[0].textContent;
 
 var cacheWorks;
 var categoryNames;
+var loginUserId; 
+var loginToken;
 
 function updateFilter() {
 
@@ -76,4 +78,32 @@ function updateWorks() {
     });
 }
 
+function loadLogin() {
+    loginToken = sessionStorage.getItem("token");
+    loginUserId = sessionStorage.getItem("userId");
+}
+
+async function loginHandler() {
+    if (loginToken === null | loginUserId == null)
+        return;
+    for (ele of document.getElementsByClassName("login-show")) {
+        ele.style.display = "flex";
+    }
+    logout = document.getElementById("loginout");
+    logout.textContent = "logout";
+    logout.addEventListener("click", (e) => {
+        loadLogin();
+        if (loginToken === null | loginUserId == null)
+            return;
+        e.preventDefault();
+        sessionStorage.clear();
+        for (ele of document.getElementsByClassName("login-show")) {
+            ele.style.display = "none";
+        }
+        e.target.textContent = "login";
+    })
+}
+
 updateWorks();
+loadLogin();
+loginHandler();

@@ -11,7 +11,6 @@ form.addEventListener("submit", (e) => {
         password: document.getElementById("formPassword").value
     }
     const loginDataJson = JSON.stringify(loginData);
-    console.log(loginDataJson);
     fetch(ip + "/users/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },

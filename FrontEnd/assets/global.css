@@ -99,6 +99,10 @@ li:hover, li:hover > a {
 	color: #B1663C;
 }
 
+#currentPage {
+	font-weight: 600;
+}
+
 section {
 	margin: 50px 0
 }
