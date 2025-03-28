@@ -17,10 +17,45 @@
 	<link rel="stylesheet" href="./assets/index.css">
 	<script src="./assets/index.js" defer></script>
 </head>
+
 <body>
 	<div class="login-show" id="login-edition-top">
 		<i class="fa-solid fa-pen-to-square"></i>
 		<h3>Mode édition</h3>
+	</div>
+	<div id="modal">
+		<div id="modal-content">
+			<nav id="modal-nav">
+				<i class="fa-solid fa-arrow-left addphoto-show" id="modal-content-goback"></i>
+				<i class="fa-solid fa-xmark" id="modal-close"></i>
+			</nav>
+			<div class="addphoto-hide">
+				<h2>Galerie photo</h2>
+				<div id="modal-content-gallery">
+				</div>
+			</div>
+			<div class="addphoto-show">
+				<h2>Ajout photo</h2>
+				<form action="#" id="modal-addphoto-form">
+					<div id="modal-addphoto-fp">
+						<i class="fa-regular fa-image"></i>
+						<input type="file" accept="image/jpeg, image/png" name="modal-addphoto-fp-btn" id="modal-addphoto-fp-hbtn">
+						<a href="#" id="modal-addphoto-fp-btn">Select some files</a>
+						<h3>jpg, png : 4mo max</h3>
+					</div>
+					<div>
+						<label for="titre">Titre</label>
+						<input type="text" name="titre" id="modal-addphoto-titre">
+					</div>
+					<div>
+						<label for="cat">Catégorie</label>
+						<select name="cat" id="modal-addphoto-select"></select>
+					</div>
+				</form>
+			</div>
+			<hr>
+			<a class="submit-like" id="modal-content-addphoto">Ajouter une photo</a>
+		</div>
 	</div>
 	<header>
 		<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
@@ -52,39 +87,39 @@
 		<section id="portfolio">
 			<div id="login-edition-project">
 				<h2>Mes Projets</h2>
-				<div class="login-show">
+				<a href="" class="login-show">
 					<i class="fa-solid fa-pen-to-square"></i>
 					<h3>modifier</h3>
-				</div>
+				</a>
 			</div>
 			<ul id="category">
 				<li class="category-active">Tout</li>
 			</ul>
 			<div class="gallery">
 			</div>
-			</section>
-			<section id="contact">
-				<h2>Contact</h2>
-				<p>Vous avez un projet ? Discutons-en !</p>
-				<form action="#" method="post">
-					<label for="name">Nom</label>
-					<input type="text" name="name" id="name">
-					<label for="email">Email</label>
-					<input type="email" name="email" id="email">
-					<label for="message">Message</label>
-					<textarea name="message" id="message" cols="30" rows="10"></textarea>
-					<input type="submit" value="Envoyer">
-				</form>
-			</section>
-			</main>
-			
-			<footer>
-				<nav>
-					<ul>
-						<li>Mentions Légales</li>
-					</ul>
-				</nav>
-			</footer>
-			</body>
-			
-			</html>
+		</section>
+		<section id="contact">
+			<h2>Contact</h2>
+			<p>Vous avez un projet ? Discutons-en !</p>
+			<form action="#" method="post">
+				<label for="name">Nom</label>
+				<input type="text" name="name" id="name">
+				<label for="email">Email</label>
+				<input type="email" name="email" id="email">
+				<label for="message">Message</label>
+				<textarea name="message" id="message" cols="30" rows="10"></textarea>
+				<input type="submit" value="Envoyer">
+			</form>
+		</section>
+	</main>
+
+	<footer>
+		<nav>
+			<ul>
+				<li>Mentions Légales</li>
+			</ul>
+		</nav>
+	</footer>
+</body>
+
+</html>

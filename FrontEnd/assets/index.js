@@ -1,35 +1,35 @@
 const ip = "http://localhost:5678/api";
 
-const galery = document.getElementsByClassName("gallery")[0];
+const gallery = document.getElementsByClassName("gallery")[0];
+const modalGalery = document.getElementById("modal-content-gallery");
 const category = document.getElementById("category");
 const firstCategoryName = category.children[0].textContent;
+const photohbtn = document.getElementById("modal-addphoto-fp-hbtn");
+const modalCategoryList = document.getElementById("modal-addphoto-select");
 
-
-var cacheWorks;
+var workList = [];
 var categoryNames;
-var loginUserId; 
+var apiCategory;
+var loginUserId;
 var loginToken;
 
 function updateFilter() {
-
     filters = document.getElementsByClassName("category-active");
     if (filters[0].textContent === firstCategoryName) {
-        for (child of galery.children) {
+        for (child of gallery.children) {
             child.style.display = "";
         }
         return;
     }
-    for (i = 0; i < cacheWorks.length; i++) {
-        (async () => {
-            for (ele of filters) {
-                if (ele.textContent === cacheWorks[i].category.name) {
-                    galery.children[i].style.display = "";
-                    return;
-                };
-            }
-            galery.children[i].style.display = "none";
-        })();
-    }
+    workList.forEach(async (work) => {
+        for (ele of filters) {
+            if (ele.textContent === work.category.name) {
+                work.galleryEle.style.display = "";
+                return;
+            };
+        }
+        work.galleryEle.style.display = "none";
+    });
 }
 
 function initFilterList(works) {
@@ -61,19 +61,61 @@ function initFilterList(works) {
     });
 }
 
-function updateWorks() {
-    fetch(ip + "/works").then((resp) => {
-        resp.json().then((works) => {
-            window.cacheWorks = works;
-            works.forEach(work => {
-                ele = document.createElement("figure");
-                ele.innerHTML = `
+async function addWork(work) {
+    galleryEle = document.createElement("figure");
+    galleryEle.innerHTML = `
                 <img src="${work.imageUrl}" alt="${work.title}">
 				<figcaption>${work.title}</figcaption>
-            `;
-                galery.appendChild(ele);
-            });
+                `;
+    gallery.appendChild(galleryEle);
+    work.galleryEle = galleryEle;
+    modalGaleryEle = document.createElement("div");
+    modalGaleryEle.innerHTML = `
+					<img src="${work.imageUrl}" alt="${work.title}">
+					<i class="fa-solid fa-trash-can"></i>
+                `;
+    modalGaleryEle.children[1].addEventListener("click", (e) => {
+        removeWork(work);
+        removeFromServerWork(work);
+    })
+    modalGalery.appendChild(modalGaleryEle);
+    work.modalGaleryEle = modalGaleryEle;
+    workList.push(work);
+}
+
+function removeWork(work) {
+    workList.splice(workList.indexOf(work), 1);
+    work.galleryEle.remove();
+    work.modalGaleryEle.remove();
+}
+
+async function removeFromServerWork(work) {
+    fetch(ip + `/works/${work.id}`, {
+        method: "DELETE",
+        headers: {
+            "Authorization": `Bearer ${loginToken}`
+        }
+    });
+}
+
+function addCategory(cat) {
+    ele = document.createElement("option");
+    ele.value = cat.id;
+    ele.textContent = cat.name;
+    modalCategoryList.appendChild(ele);
+}
+
+function initApi() {
+    fetch(ip + "/works").then((resp) => {
+        resp.json().then((works) => {
+            works.forEach(addWork);
             initFilterList(works);
+        });
+    });
+    fetch(ip + "/categories").then((rep) => {
+        rep.json().then((j) => {
+            apiCategory = j;
+            j.forEach(addCategory)
         });
     });
 }
@@ -83,12 +125,14 @@ function loadLogin() {
     loginUserId = sessionStorage.getItem("userId");
 }
 
-async function loginHandler() {
+function loginHandler() {
     if (loginToken === null | loginUserId == null)
         return;
     for (ele of document.getElementsByClassName("login-show")) {
         ele.style.display = "flex";
     }
+    nav = document.querySelector("header");
+    nav.style.marginTop = "88px";
     logout = document.getElementById("loginout");
     logout.textContent = "logout";
     logout.addEventListener("click", (e) => {
@@ -100,10 +144,62 @@ async function loginHandler() {
         for (ele of document.getElementsByClassName("login-show")) {
             ele.style.display = "none";
         }
+        nav.style.marginTop = "0px";
         e.target.textContent = "login";
-    })
+    });
 }
 
-updateWorks();
+function handleFiles(e) {
+    console.log(photohbtn.value);
+}
+
+function initModal() {
+    document.querySelector("#login-edition-project > a").addEventListener("click", (e) => {
+        e.preventDefault();
+        document.getElementById("modal").style.display = "flex";
+    });
+    document.getElementById("modal").addEventListener("click", (e) => {
+        if (e.target.id != "modal") {
+            return;
+        }
+        document.getElementById("modal").style.display = "none";
+    });
+    document.getElementById("modal-close").addEventListener("click", (e) => {
+        document.getElementById("modal-content-goback").click()
+        document.getElementById("modal").style.display = "none";
+    });
+    document.getElementById("modal-content-addphoto").addEventListener("click", (e) => {
+        e.preventDefault();
+        for (cl of document.getElementsByClassName("addphoto-hide")) {
+            cl.style.display="none";
+        }
+        for (cl of document.getElementsByClassName("addphoto-show")) {
+            if (cl.id === "modal-content-goback")
+                cl.style.visibility = "visible"
+            else
+                cl.style.display = "flex";
+        }
+    });
+    document.getElementById("modal-content-goback").addEventListener("click", (e) => {
+        e.preventDefault();
+        for (cl of document.getElementsByClassName("addphoto-hide")) {
+            cl.style.display = "flex";
+        }
+        for (cl of document.getElementsByClassName("addphoto-show")) {
+             if (cl.id === "modal-content-goback")
+                cl.style.visibility = "hidden"
+            else
+                cl.style.display = "none";
+        }
+    })
+    document.getElementById("modal-addphoto-fp-btn").addEventListener("click", (e) => {
+        e.preventDefault();
+        photohbtn.click()
+    });
+    photohbtn.addEventListener("change", handleFiles);
+}
+
+initModal();
+initApi();
 loadLogin();
 loginHandler();
