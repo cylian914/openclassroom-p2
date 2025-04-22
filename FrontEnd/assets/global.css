@@ -121,7 +121,7 @@ footer nav ul {
 }
 
 
-input, select {
+input, select, button {
 	background-color: white;
 	height: 50px;
 	font-size: 1.2em;

@@ -29,6 +29,7 @@
 				<i class="fa-solid fa-arrow-left addphoto-show" id="modal-content-goback"></i>
 				<i class="fa-solid fa-xmark" id="modal-close"></i>
 			</nav>
+			<div>
 			<div class="addphoto-hide">
 				<h2>Galerie photo</h2>
 				<div id="modal-content-gallery">
@@ -40,8 +41,9 @@
 					<div id="modal-addphoto-fp">
 						<i class="fa-regular fa-image"></i>
 						<input type="file" accept="image/jpeg, image/png" name="modal-addphoto-fp-btn" id="modal-addphoto-fp-hbtn">
-						<a href="#" id="modal-addphoto-fp-btn">Select some files</a>
+						<button type="button" class="submit-like" id="modal-addphoto-fp-btn">+ Ajouter photo</button>
 						<h3>jpg, png : 4mo max</h3>
+						<img id="modal-addphoto-img">
 					</div>
 					<div>
 						<label for="titre">Titre</label>
@@ -54,7 +56,8 @@
 				</form>
 			</div>
 			<hr>
-			<a class="submit-like" id="modal-content-addphoto">Ajouter une photo</a>
+			<button form="modal-addphoto-form" type="submit" class="submit-like" id="modal-content-addphoto">Ajouter une photo</a>
+			</div>
 		</div>
 	</div>
 	<header>

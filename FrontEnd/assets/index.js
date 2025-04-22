@@ -32,12 +32,16 @@ function updateFilter() {
     });
 }
 
+function disableFilter() {
+    filters = document.getElementsByClassName("category-active");
+    while (filters.length > 0) {
+        filters[0].classList.remove("category-active")
+    }
+}
+
 function initFilterList(works) {
     window.category.children[0].addEventListener("click", (e) => {
-        filters = document.getElementsByClassName("category-active");
-        while (filters.length > 0) {
-            filters[0].classList.remove("category-active")
-        }
+        disableFilter();
         e.target.classList.add("category-active");
         updateFilter();
     });
@@ -50,11 +54,8 @@ function initFilterList(works) {
         ele = document.createElement("li");
         ele.textContent = category;
         ele.addEventListener("click", (e) => {
-            window.category.children[0].classList.remove("category-active");
-            e.target.classList.toggle("category-active");
-            if (document.getElementsByClassName("category-active").length === 0) {
-                window.category.children[0].classList.add("category-active")
-            }
+            disableFilter();
+            e.target.classList.add("category-active");
             updateFilter();
         });
         window.category.appendChild(ele);
@@ -89,7 +90,7 @@ function removeWork(work) {
     work.modalGaleryEle.remove();
 }
 
-async function removeFromServerWork(work) {
+function removeFromServerWork(work) {
     fetch(ip + `/works/${work.id}`, {
         method: "DELETE",
         headers: {
@@ -150,7 +151,35 @@ function loginHandler() {
 }
 
 function handleFiles(e) {
-    console.log(photohbtn.value);
+    file = e.target.files[0];
+    if (file.size > 32000000) {
+        alert("Fichier trop gros");
+        return;
+    }
+    for (ele of document.getElementById("modal-addphoto-fp").children) {
+        if (ele.id !== "modal-addphoto-img") {
+            ele.style.display = "none";
+        }
+        else {
+            ele.file = file;
+            ele.style.display = "";
+        }
+    }
+    document.getElementById("modal-addphoto-img").src = URL.createObjectURL(file);
+    checkForm();
+}
+
+
+function checkForm() {
+    ele = document.getElementById("modal-content-addphoto");
+    if (document.getElementById("modal-addphoto-img").file === undefined ||
+        document.getElementById("modal-addphoto-titre").value === undefined ||
+        document.getElementById("modal-addphoto-select").value === undefined) {
+        ele.style.backgroundColor = "#A7A7A7";
+        return false;
+    }
+    ele.style.backgroundColor = "#1D6154";
+    return true;
 }
 
 function initModal() {
@@ -162,13 +191,47 @@ function initModal() {
         if (e.target.id != "modal") {
             return;
         }
-        document.getElementById("modal").style.display = "none";
+        document.getElementById("modal-close").click();
     });
     document.getElementById("modal-close").addEventListener("click", (e) => {
-        document.getElementById("modal-content-goback").click()
+        document.getElementById("modal-content-goback").click();
         document.getElementById("modal").style.display = "none";
+        for (ele of document.getElementById("modal-addphoto-fp").children) {
+            ele.style.display="";
+            if (ele.id === "modal-addphoto-img") {
+                ele.style.display = "none";
+                if (ele.src !== undefined) {
+                    URL.revokeObjectURL(ele.src);
+                    ele.src = "";
+                }
+            }
+        }
     });
+
     document.getElementById("modal-content-addphoto").addEventListener("click", (e) => {
+        if (checkForm() && document.getElementById("modal-addphoto-form").parentElement.style.display !== "none") {
+            form = new FormData();
+            form.set("image", document.getElementById("modal-addphoto-img").file);
+            form.set("title", document.getElementById("modal-addphoto-titre").value);
+            form.set("category", document.getElementById("modal-addphoto-select").value); 
+            fetch(ip + "/works", {
+                method: "POST",
+                headers: {
+                    "Authorization": `Bearer ${loginToken}`,
+                },
+                body: form
+            }).then((e) => {
+                e.json().then((ev) => {
+                    i = parseInt(ev.categoryId);
+                    ev.category = {
+                        id: i,
+                        name: categoryNames[i]
+                    }
+                    addWork(ev);
+                })
+            });
+            document.getElementById("modal-close").click();
+        }
         e.preventDefault();
         for (cl of document.getElementsByClassName("addphoto-hide")) {
             cl.style.display="none";
@@ -180,8 +243,15 @@ function initModal() {
                 cl.style.display = "flex";
         }
     });
+    document.getElementById("modal-addphoto-titre").addEventListener("change", (e) => {
+        checkForm();
+    });
+    document.getElementById("modal-addphoto-select").addEventListener("change", (e) => {
+        checkForm();
+    });    
     document.getElementById("modal-content-goback").addEventListener("click", (e) => {
         e.preventDefault();
+        console.log(e.target);
         for (cl of document.getElementsByClassName("addphoto-hide")) {
             cl.style.display = "flex";
         }

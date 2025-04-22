@@ -161,6 +161,10 @@
 #modal-content > div {
 	padding-right: 15px;
 	padding-left: 15px;
+	display: flex;
+	flex-direction: column;
+}
+#modal-content > div > div {
 	gap: 30px;
 	justify-content: center;
 	align-items: center;
@@ -235,6 +239,10 @@
 #modal-addphoto-fp-hbtn {
 	display: none;
 }
+#modal-addphoto-fp-btn {
+	background-color: #CBD6DC;
+	color: #306685;
+}
 
 #modal-addphoto-form {
 	padding-right: 105px;
@@ -250,4 +258,8 @@
 	flex-direction: column;
 	width: 100%;
 	gap: 5px;
+}
+
+#modal-content-addphoto {
+	width: 50%;
 }
