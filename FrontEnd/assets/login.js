@@ -1,7 +1,7 @@
 const ip = "http://localhost:5678/api";
 
 const form = document.getElementById("formRoot");
-
+const err = document.getElementById("error");
 
 
 form.addEventListener("submit", (e) => {
@@ -25,10 +25,10 @@ form.addEventListener("submit", (e) => {
                 });
                 break;
             case 401:
-                alert("Password incorrect");
+                err.textContent = "Error: mot de passe incorrect"
                 break;
             case 404:
-                alert("user not found");
+                err.textContent = "Error: utilisateur incorrect"
                 break;
             }
     })
