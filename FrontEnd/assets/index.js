@@ -152,8 +152,14 @@ function loginHandler() {
 
 function handleFiles(e) {
     file = e.target.files[0];
-    if (file.size > 32000000) {
+    if (file.size > 4000000) {
         alert("Fichier trop gros");
+        return;
+    }
+    fn = file.name.split('.').pop();
+    console.log(fn);
+    if (fn != "jpeg" && fn != "png") {
+        alert("Extension inncorect");
         return;
     }
     for (ele of document.getElementById("modal-addphoto-fp").children) {
@@ -173,7 +179,7 @@ function handleFiles(e) {
 function checkForm() {
     ele = document.getElementById("modal-content-addphoto");
     if (document.getElementById("modal-addphoto-img").file === undefined ||
-        document.getElementById("modal-addphoto-titre").value === undefined ||
+        document.getElementById("modal-addphoto-titre").value === undefined || document.getElementById("modal-addphoto-titre").value == "" || 
         document.getElementById("modal-addphoto-select").value === undefined) {
         ele.style.backgroundColor = "#A7A7A7";
         return false;
