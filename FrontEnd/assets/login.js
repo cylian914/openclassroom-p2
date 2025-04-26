@@ -26,9 +26,11 @@ form.addEventListener("submit", (e) => {
                 break;
             case 401:
                 err.textContent = "Error: mot de passe incorrect"
+                err.style.display = "block";
                 break;
             case 404:
                 err.textContent = "Error: utilisateur incorrect"
+                err.style.display = "block";
                 break;
             }
     })

@@ -36,4 +36,5 @@ h3 {
 #error {
 	margin: 20px;
 	color: darkred;
+	display: none;
 }

@@ -133,7 +133,6 @@ function loginHandler() {
         ele.style.display = "flex";
     }
     nav = document.querySelector("header");
-    nav.style.marginTop = "88px";
     logout = document.getElementById("loginout");
     logout.textContent = "logout";
     logout.addEventListener("click", (e) => {
@@ -145,7 +144,6 @@ function loginHandler() {
         for (ele of document.getElementsByClassName("login-show")) {
             ele.style.display = "none";
         }
-        nav.style.marginTop = "0px";
         e.target.textContent = "login";
     });
 }

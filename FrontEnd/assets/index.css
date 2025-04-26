@@ -90,15 +90,11 @@
 }
 
 #login-edition-top {
-	position: absolute;
-	top:0;
-	right: 0;
 	background-color: black;
-	width: 100%;
+	width: 100vw;
 	justify-content: center;
 	gap: 21px;
-  padding: 19.5px;
-	z-index: 1;
+  	padding: 19.5px;
 }
 
 #login-edition-top > * {
