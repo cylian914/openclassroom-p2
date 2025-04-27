@@ -1,0 +1,2 @@
+reduir taille image
+fixer lataille des image dans le css
