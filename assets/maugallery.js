@@ -178,10 +178,11 @@
     },
     showItemTags(gallery, position, tags) {
       var tagItems =
-        '<li class="nav-item"><span class="nav-link active active-tag"  data-images-toggle="all">Tous</span></li>';
+        '<li class="nav-item"><span class="nav-link active-tag"  data-images-toggle="all">Tous</span></li>';
       $.each(tags, function(index, value) {
-        tagItems += `<li class="nav-item active">
-                <span class="nav-link"  data-images-toggle="${value}">${value}</span></li>`;
+        tagItems += `<li class="nav-item">
+                        <span class="nav-link"  data-images-toggle="${value}">${value}</span>
+                     </li>`;
       });
       var tagsRow = `<ul class="my-4 tags-bar nav nav-pills">${tagItems}</ul>`;
 
@@ -197,7 +198,7 @@
       if ($(this).hasClass("active-tag")) {
         return;
       }
-      $(".active-tag").removeClass("active active-tag");
+      $(".active-tag").removeClass("active-tag");
       $(this).addClass("active-tag");
 
       var tag = $(this).data("images-toggle");
