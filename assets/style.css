@@ -67,6 +67,11 @@ body {
 	z-index: 0;
 }
 
+.carousel-item > img {
+	width: 100vw;
+	height: calc(100vw/2.16216216);
+}
+
 .picture img {
 	width: 100%;
 

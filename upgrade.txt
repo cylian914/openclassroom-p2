@@ -1,2 +1,4 @@
 reduir taille image
-fixer lataille des image dans le css
+ne pas utiliser jquerry
+fix la taille des image
+passer le format des image au WebP
