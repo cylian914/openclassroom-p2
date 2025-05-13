@@ -1,4 +1,4 @@
 reduir taille image
-ne pas utiliser jquerry
 fix la taille des image
 passer le format des image au WebP
+utiliser les .min.* 
