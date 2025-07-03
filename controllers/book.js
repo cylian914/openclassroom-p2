@@ -74,7 +74,7 @@ exports.deleteBooks = (req, res, next) => {
             return res.status(401).json({ message: 'Not authorized' });
         } else {
             const filename = d.imageUrl.split('/runtime/images/')[1];
-            fs.unlink(`/runtime/images/${filename}`, () => {
+            fs.unlink(`${global.baseDir}/runtime/images/${filename}`, () => {
                 Books.deleteOne({ _id: req.params.id })
                     .then(() => { res.status(200).json({ message: 'Objet supprimé !' }) })
                     .catch(err => res.status(401).json({ message: err }));

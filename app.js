@@ -8,7 +8,7 @@ const authRoute = require('./routeHandler/routes/auth')
 
 const pass = process.env.pass;
 
-db.connect(`mongodb+srv://cylian91:${pass}@cluster0.ominbpx.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`, {useNewUrlParser: true, useUnifiedTopology: true })
+db.connect(`mongodb+srv://cylian91:${pass}@cluster0.ominbpx.mongodb.net/livre?retryWrites=true&w=majority&appName=Cluster0`, {useNewUrlParser: true, useUnifiedTopology: true })
 
 app.use(express.json())
 
